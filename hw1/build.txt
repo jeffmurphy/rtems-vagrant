@@ -1,0 +1,20 @@
+
+  export PROJECT_ROOT=/home/vagrant/development/rtems/4.10
+  export RTEMS_CUSTOM=~/development/rtems/4.10/make/main.cfg 
+  export RTEMS_ROOT=~/development/rtems/4.10
+  export PATH=${PATH}:/home/vagrant/development/rtems/4.10/bin
+  export RTEMS_MAKEFILE_PATH=/home/vagrant/development/rtems/4.10/sparc-rtems4.10/leon3
+
+  git clone https://github.com/RTEMS/examples-v2.git
+  cd examples-v2
+  git checkout examples-v2-4-10-branch
+  make
+
+  # hello/hello_world_c/o-optimize/hello.exe contains the leon3 executable
+  
+  export RTEMS_MAKEFILE_PATH=/home/vagrant/development/rtems/4.10/sparc-rtems4.10/erc32
+  make clean
+  make
+
+  # hello/hello_world_c/o-optimize/hello.exe contains the erc32 executable
+
