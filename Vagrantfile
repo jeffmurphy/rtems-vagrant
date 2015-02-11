@@ -82,7 +82,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #               Managed by Puppet.\n"
    # }
   #
-  $script = <<SCRIPT
+  $rootscript = <<SCRIPT
   echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
   sysctl -p
   apt-get update
@@ -94,7 +94,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ./configure --prefix=/usr/local
   make
   make install
-  #git clone git://git.rtems.org/rtems-source-builder.git
+SCRIPT
+
+  $nonrootscript = <<SCRIPT
   git clone https://github.com/jeffmurphy/rtems-source-builder.git
   mkdir -p ~/development/rtems/4.11
   cd rtems-source-builder/rtems
@@ -104,7 +106,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   tar -zxf tsim-eval-2.0.36.tar.gz
 SCRIPT
 
-  config.vm.provision "shell", inline: $script
+  config.vm.provision "shell", inline: $rootscript
+  config.vm.provision "shell", inline: $nonrootscript, privileged: false
 
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
