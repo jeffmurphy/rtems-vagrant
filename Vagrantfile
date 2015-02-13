@@ -23,12 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network :private_network, ip: "192.168.33.10"
+  config.vm.network :private_network, ip: "192.168.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  config.vm.network :public_network
+  # config.vm.network :public_network
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
@@ -44,13 +44,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider :virtualbox do |vb|
+  config.vm.provider :virtualbox do |vb|
   #   # Don't boot with headless mode
-  #   vb.gui = true
+    vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
   #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -83,10 +83,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    # }
   #
   $rootscript = <<SCRIPT
-  echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
-  sysctl -p
   apt-get update
-  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python27-dev zlib1g-dev libncurses-dev
+  apt-get install -y python-pip make build-essential python-dev libffi-dev git bison cvs g++ flex zlib1g-dev libncurses-dev vim
   cd /tmp
   wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
   gzip -dc < texinfo-4.13.tar.gz | tar -xf -
