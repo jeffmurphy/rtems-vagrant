@@ -85,6 +85,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   $rootscript = <<SCRIPT
   apt-get update
   apt-get install -y python-pip make build-essential python-dev libffi-dev git bison cvs g++ flex zlib1g-dev libncurses-dev vim
+  cd /tmp
+  wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
+  gzip -dc < texinfo-4.13.tar.gz | tar -xf -
+  cd texinfo-4.13
+  ./configure --prefix=/usr/local
+  make
+  make install
 SCRIPT
 
   $nonrootscript = <<SCRIPT
