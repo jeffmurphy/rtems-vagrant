@@ -86,7 +86,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
   sysctl -p
   apt-get update
-  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev
+  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev  unzip
   cd /tmp
   wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
   gzip -dc < texinfo-4.13.tar.gz | tar -xf -
