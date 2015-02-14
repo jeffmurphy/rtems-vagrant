@@ -14,7 +14,7 @@ rtems_task Init(
 )
 {
   printf( "\n\n*** HELLO WORLD TEST ***\n" );
-  printf( "Hello World\n" );
+  printf( "Hello Syn-tax Collectors!\n" );
   printf( "*** END OF HELLO WORLD TEST ***\n" );
   exit( 0 );
 }
