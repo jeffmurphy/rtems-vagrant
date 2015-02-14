@@ -55,9 +55,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.vm.define "box1" do |box1|
-    box1.vm.hostname = "box1"
-    box1.vm.provider :virtualbox do |vb|
+  config.vm.define "rtemsbox1" do |rtemsbox1|
+    rtemsbox1.vm.hostname = "rtemsbox1"
+    rtemsbox1.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "2048"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
       vb.customize ["modifyvm", :id, "--cpus", "2"] 
@@ -86,7 +86,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
   sysctl -p
   apt-get update
-  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python27-dev zlib1g-dev libncurses-dev
+  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev
   cd /tmp
   wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
   gzip -dc < texinfo-4.13.tar.gz | tar -xf -
@@ -94,6 +94,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ./configure --prefix=/usr/local
   make
   make install
+  apt-get install mlton
 SCRIPT
 
   $nonrootscript = <<SCRIPT
