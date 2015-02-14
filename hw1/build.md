@@ -38,28 +38,9 @@ rtems_task Init(
 /* end of file */
 ```
 
-# Build 
-
-To build, we first configured the environment to reference the
-RTEMS installation:
-
-```
-  export PROJECT_ROOT=/home/vagrant/development/rtems/4.10
-  export RTEMS_CUSTOM=~/development/rtems/4.10/make/main.cfg 
-  export RTEMS_ROOT=~/development/rtems/4.10
-  export PATH=${PATH}:/home/vagrant/development/rtems/4.10/bin
-```
-
 # Build (sis)
 
-To build for sis, we configure the environment to reference the sis
-build configuration:
-
-```
-  export RTEMS_MAKEFILE_PATH=/home/vagrant/development/rtems/4.10/sparc-rtems4.10/sis
-```
-
-We can then build hello world using:
+We can build hello world using:
 
 ```
 sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/erc32/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress       -mcpu=cypress   -o o-optimize/hello.exe  o-optimize/test.o        
@@ -81,16 +62,7 @@ sparc-rtems4.10-gdb ./hello/hello_world_c/o-optimize/hello.exe
 
 # Build (leon3)
 
-The leon3 build procedure mimics the sis procedure:
-
-To build for leon3, we configure the environment to reference the leon3
-build configuration:
-
-```
-  export RTEMS_MAKEFILE_PATH=/home/vagrant/development/rtems/4.10/sparc-rtems4.10/leon3
-```
-
-We can then build hello world using:
+We can build hello world using:
 
 ```
 sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/leon3/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress -msoft-float       -mcpu=cypress -msoft-float   -o o-optimize/hello.exe  o-optimize/test.o        
