@@ -131,7 +131,7 @@ starting at 0x40000000
 
 
 *** HELLO WORLD TEST ***
-Hello World
+Hello Syn-tax Collectors!
 *** END OF HELLO WORLD TEST ***
 
 
