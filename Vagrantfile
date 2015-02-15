@@ -85,7 +85,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   $rootscript = <<SCRIPT
   echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
   sysctl -p
-  apt-get update
+  apt-get update -y
   apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev  unzip
   cd /tmp
   wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
@@ -94,7 +94,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ./configure --prefix=/usr/local
   make
   make install
-  apt-get install mlton
+  apt-get install -y mlton
 SCRIPT
 
   $nonrootscript = <<SCRIPT
@@ -105,6 +105,9 @@ SCRIPT
   cd $HOME
   wget http://www.gaisler.com/anonftp/tsim/tsim-eval-2.0.36.tar.gz
   tar -zxf tsim-eval-2.0.36.tar.gz
+  git clone https://github.com/RTEMS/examples-v2.git
+  cd examples-v2
+  git checkout examples-v2-4-10-branch
 SCRIPT
 
   config.vm.provision "shell", inline: $rootscript
