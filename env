@@ -1,0 +1,7 @@
+#!/bin/sh
+export PROJECT_ROOT=/home/vagrant/development/rtems/4.10
+export RTEMS_CUSTOM=~/development/rtems/4.10/make/main.cfg 
+export RTEMS_ROOT=~/development/rtems/4.10
+export PATH=${PATH}:/home/vagrant/development/rtems/4.10/bin
+ 
+export RTEMS_MAKEFILE_PATH=/home/vagrant/development/rtems/4.10/sparc-rtems4.10/sis
