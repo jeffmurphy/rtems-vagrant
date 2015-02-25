@@ -43,6 +43,7 @@ rtems_task Init(
 We can build hello world using:
 
 ```
+sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/sis/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress     -c   -o o-optimize/test.o test.c
 sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/erc32/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress       -mcpu=cypress   -o o-optimize/hello.exe  o-optimize/test.o        
 sparc-rtems4.10-nm -g -n o-optimize/hello.exe > o-optimize/hello.num
 sparc-rtems4.10-size o-optimize/hello.exe
@@ -65,6 +66,7 @@ sparc-rtems4.10-gdb ./hello/hello_world_c/o-optimize/hello.exe
 We can build hello world using:
 
 ```
+sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/sis/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress     -c   -o o-optimize/test.o test.c
 sparc-rtems4.10-gcc --pipe -B/home/vagrant/development/rtems/4.10/sparc-rtems4.10/leon3/lib/ -specs bsp_specs -qrtems   -g -Wall  -O2 -g -g    -mcpu=cypress -msoft-float       -mcpu=cypress -msoft-float   -o o-optimize/hello.exe  o-optimize/test.o        
 sparc-rtems4.10-nm -g -n o-optimize/hello.exe > o-optimize/hello.num
 sparc-rtems4.10-size o-optimize/hello.exe
