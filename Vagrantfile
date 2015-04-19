@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -35,7 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
-  # config.ssh.forward_agent = true
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -43,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
 
   config.vm.synced_folder ".", "/vagrant_data"
-  config.vm.synced_folder "#{ENV['HOME']}/git", "/git"
+  config.vm.synced_folder "#{ENV['HOME']}/Documents/Aptana/CSE", "/git"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -91,7 +93,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1\n" >> /etc/sysctl.conf
   sysctl -p
   apt-get update -y
-  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev  unzip automake autoconf
+  apt-get install -y python-pip build-essential python-dev libffi-dev git bison cvs g++ flex python-dev zlib1g-dev libncurses-dev  unzip automake autoconf qemu
   cd /tmp
   wget http://ftp.gnu.org/gnu/texinfo/texinfo-4.13.tar.gz
   gzip -dc < texinfo-4.13.tar.gz | tar -xf -
@@ -100,6 +102,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   make
   make install
   apt-get install -y mlton
+  echo " " >> /etc/ssh/sshd_config
+  echo X11UseLocalhost no >> /etc/ssh/sshd_config
+  restart ssh
 SCRIPT
 
   $nonrootscript = <<SCRIPT
@@ -107,6 +112,7 @@ SCRIPT
   mkdir -p ~/development/rtems/4.10
   cd rtems-source-builder/rtems
   ../source-builder/sb-set-builder --log=l-sparc.txt --prefix=$HOME/development/rtems/4.10 --with-rtems 4.10/rtems-sparc
+  ../source-builder/sb-set-builder --log=l-i386.txt  --prefix=$HOME/development/rtems/4.10 --with-rtems 4.10/rtems-i386
   cd $HOME
   wget http://www.gaisler.com/anonftp/tsim/tsim-eval-2.0.36.tar.gz
   tar -zxf tsim-eval-2.0.36.tar.gz
